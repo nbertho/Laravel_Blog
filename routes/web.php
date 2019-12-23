@@ -12,11 +12,19 @@
 */
 
 /*
-Route::get('/', function () {
-    return view('welcome');
-});
+  MISES A DISPOSITION DE DONNEES POUR CERTAINES VUES
 */
 
-Route::get('/', 'PagesController@show')->name('homepage');
+  // Gestion dynamique du menu
+    View::composer('pages.menu', function($view){
+      $view->with('pages', App\Http\Models\Page::all());
+    });
 
-Route::resource('pages', 'PagesController');
+/*
+  ROUTES
+*/
+  // Route par défaut
+    Route::get('/', 'PagesController@show')->name('homepage');
+
+  // Route pages
+    Route::resource('pages', 'PagesController');
