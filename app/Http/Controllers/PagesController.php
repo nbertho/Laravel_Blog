@@ -3,6 +3,7 @@
 
       use Illuminate\Support\Facades\View;
       use App\Http\Models\Page as PagesMdl;
+      use App\Http\Models\Post as PostsMdl;
 
       class PagesController extends Controller {
 
@@ -13,8 +14,12 @@
          */
           public function show($id = 1){
             $page =PagesMdl::find($id);
+            if ($page->id === 1):
+              $posts = PostsMdl::orderby('datePublication', 'desc')->take(10)->get();
+              return View::make('pages.show', compact('page', 'posts'));
+            endif;
             return View::make('pages.show', compact('page'));
           }
 
-        
+
       }
