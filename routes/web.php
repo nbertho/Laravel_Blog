@@ -28,3 +28,6 @@
 
   // Route pages
     Route::resource('pages', 'PagesController');
+
+  // Route posts
+    Route::resource('posts', 'PostsController');
